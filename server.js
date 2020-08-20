@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const connection = require("./src/connection");
 const crud = require('./api/crud');
 const app = express();
