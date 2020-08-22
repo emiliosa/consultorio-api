@@ -30,10 +30,13 @@
 'use strict';
 
 console.log(require('dotenv').config());
-// const express = require('express');
 const app = require('./src/app');
 const mongoose = require('mongoose');
-const connectionString = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+const connectionString = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authSource=admin`;
+
+if (process.env.NODE_ENV === 'development') {
+  mongoose.set('debug', true);
+}
 
 mongoose.Promise = global.Promise;
 mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -46,6 +49,11 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
   })
   // Si no se conecta correctamente escupimos el error
   .catch(err => console.log(err));
+
+
+
+
+  
 
 // // App
 // const app = express();
