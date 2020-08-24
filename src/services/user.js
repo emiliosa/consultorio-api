@@ -1,123 +1,143 @@
-const user = require('../models/user');
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
+'use strict'
 
-// Async function to get the User List
-exports.getUsers = async function (query, page, limit) {
-  // Try Catch the awaited promise to handle the error 
+const UserModel = require('../models/user');
+const AdministrativeModel = require('../models/administrative');
+const ProfessionalModel = require('../models/professional');
+const AdminModel = require('../models/admin');
+const PatientModel = require('../models/patient');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+exports.getUsers = async (query, page, limit) => {
   try {
-    // Return the Userd list that was retured by the mongoose promise
-    return await user.paginate(query, { page, limit });
-
+    return await UserModel.paginate(query, { page, limit });
   } catch (e) {
-    // return a Error message describing the reason 
-    throw Error('Error while Paginating Users');
+    throw Error(e);
   }
 };
 
-// Async function to get User by id
-exports.getUserByDni = async function (dni) {
-  // Try Catch the awaited promise to handle the error 
+exports.getUserById = async (id) => {
   try {
-    const query = { 'dni': dni };
-    return await user.find(query);
-
+    return await UserModel.find({ '_id': id });
   } catch (e) {
-    // return a Error message describing the reason 
-    throw Error('Error while Paginating Users');
+    throw Error(e);
   };
 }
 
-exports.createUser = async function (attributes) {
-  // Creating a new Mongoose Object by using the new keyword
-  // var hashedPassword = bcrypt.hashSync(user.password, 8);
-
+exports.createUser = async (attributes) => {
   try {
+    let roleData, roleType = {};
+
     console.log(attributes);
-    return await (new user({
-      nombre: attributes.nombre,
-      apellido: attributes.email,
-      fecha_nacimiento: attributes.fecha_nacimiento,
-      dni: attributes.dni,
-      email: attributes.email,
-      password: attributes.password,
-      role: attributes.role,
-    })).save();
-    // var savedUser = await user.save();
-    // var token = jwt.sign({
-    //     id: savedUser._id
-    // }, process.env.SECRET, {
-    //     expiresIn: 86400 // expires in 24 hours
-    // });
-    // return token;
+
+    const { dni, name, lastname, birthday, email, password, role, studies, speciality } = attributes;
+    const hashedPassword = bcrypt.hashSync(password, 8);
+
+    const newUser = await UserModel.create({
+      name: name,
+      lastname: lastname,
+      birthday: new Date(birthday),
+      dni: dni,
+      email: email,
+      password: hashedPassword,
+      role: role,
+    });
+
+    switch (newUser.role.name) {
+      case 'Paciente':
+        roleType = 'patient';
+        roleData = await (new PatientModel({ user: newUser, studies: studies })).save();
+        break;
+      case 'Profesional':
+        roleType = 'professional';
+        roleData = await (new ProfessionalModel({ user: newUser, speciality: speciality })).save();
+        break;
+      case 'Administrativo':
+        roleType = 'administrative';
+        roleData = await (new AdministrativeModel({ user: newUser })).save();
+        break;
+      case 'Admin':
+        roleType = 'admin';
+        roleData = await (new AdminModel({ user: newUser })).save();
+        break;
+      default:
+        throw Error('Role not found');
+    };
+
+    const token = jwt.sign({
+        id: newUser._id
+    }, process.env.SECRET_KEY, {
+        expiresIn: 86400 // expires in 24 hours
+    });
+
+    console.log(newUser, roleType, roleData, token);
+
+    return {user: newUser, roleType: roleData, accessToken: token};
   } catch (e) {
-    // return a Error message describing the reason 
-    console.log(e);
-    throw Error("Error while Creating User");
+    throw Error(e);
   }
 }
 
-exports.updateUser = async function (dni, attributes) {
-    var id = user.id
-    try {
-        //Find the old User Object by the Id
-        var oldUser = await User.findById(id);
-    } catch (e) {
-        throw Error("Error occured while Finding the User")
-    }
-    // If no old User Object exists return false
-    if (!oldUser) {
-        return false;
-    }
-    //Edit the User Object
-    oldUser.name = user.name
-    oldUser.email = user.email
-    oldUser.password = user.password
-    try {
-        var savedUser = await oldUser.save()
-        return savedUser;
-    } catch (e) {
-        throw Error("And Error occured while updating the User");
-    }
+// TODO mejorar validación cuando un campo es undefined (no alcanza con destructurar attributes)
+// https://zellwk.com/blog/express-middlewares/
+exports.updateUser = async (id, attributes) => {
+  try {
+    console.log(attributes);
+    const { dni, name, lastname, birthday, email, role } = attributes;
+
+    return UserModel.findOneAndUpdate(
+      { _id: id },
+      { dni, name, lastname, birthday, email, role },
+      { new: true }
+    );
+  } catch (e) {
+    throw Error(e);
+  }
 }
 
-// exports.deleteUser = async function (id) {
+// debería eliminar el jwt
+exports.updateUserPassword = async (id, password) => {
+  try {
+    return UserModel.findOneAndUpdate(
+      { _id: id },
+      { password }
+    );
+  } catch (e) {
+    throw Error(e);
+  }
+};
 
-//     // Delete the User
-//     try {
-//         var deleted = await User.remove({
-//             _id: id
-//         })
-//         if (deleted.n === 0 && deleted.ok === 1) {
-//             throw Error("User Could not be deleted")
-//         }
-//         return deleted;
-//     } catch (e) {
-//         throw Error("Error Occured while Deleting the User")
-//     }
-// }
+exports.deleteUser = async (id) => {
+  try {
+    console.log(id);
+    const deleted = await UserModel.findOneAndDelete({ _id: id });
+    console.log(deleted);
+    return deleted;
+  } catch (e) {
+    throw Error(e);
+  }
+}
 
+exports.login = async (email, password) => {
+  try {
+    const user = await UserModel.findOne({
+      email: email
+    });
 
-// exports.loginUser = async function (user) {
+    if (!bcrypt.compareSync(password, user.password)) {
+      throw Error("Invalid username/password")
+    }
 
-//     // Creating a new Mongoose Object by using the new keyword
-//     try {
-//         // Find the User 
-//         var _details = await User.findOne({
-//             email: user.email
-//         });
-//         var passwordIsValid = bcrypt.compareSync(user.password, _details.password);
-//         if (!passwordIsValid) throw Error("Invalid username/password")
+    user.password = undefined;
 
-//         var token = jwt.sign({
-//             id: _details._id
-//         }, process.env.SECRET, {
-//             expiresIn: 86400 // expires in 24 hours
-//         });
-//         return token;
-//     } catch (e) {
-//         // return a Error message describing the reason     
-//         throw Error("Error while Login User")
-//     }
+    const token = jwt.sign({
+      id: user._id
+    }, process.env.SECRET_KEY, {
+      expiresIn: 86400 // expires in 24 hours
+    });
 
-// }
+    return { user: user, accessToken: token };
+  } catch (e) {
+    throw Error(e)
+  }
+};
