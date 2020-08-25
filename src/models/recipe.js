@@ -8,7 +8,7 @@ const RecipeSchema = mongoose.Schema({
   patient: { type: JSON, required: true },
   professional: { type: JSON, required: true },
   description: { type: String, required: true },
-  file: { type: JSON, required: true },
+  files: { type: Array },
   date: { type: Date, required: true },
   createdByUser: { type: JSON, required: true },
 });

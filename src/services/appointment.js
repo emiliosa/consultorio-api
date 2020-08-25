@@ -25,9 +25,9 @@ exports.getAppointmentById = async (id) => {
 }
 
 // TODO mejorar templates de envío de mails, usar .pug
-exports.createAppointment = async (attributes) => {
+exports.createAppointment = async (attributes, user) => {
   try {
-    console.log(attributes);
+    console.log(attributes, user);
 
     const { patientId, professionalId, description, date } = attributes;
     const patient = await PatientModel.findOne({ _id: patientId });
@@ -39,7 +39,7 @@ exports.createAppointment = async (attributes) => {
       date: new Date(date),
       description: description,
       status: 'Pendiente',
-      createdByUser: {}
+      createdByUser: user
     });
 
     console.log(newAppointment);

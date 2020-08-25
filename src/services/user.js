@@ -43,7 +43,7 @@ exports.createUser = async (attributes) => {
       role: role,
     });
 
-    switch (newUser.role.name) {
+    switch (newUser.role) {
       case 'Paciente':
         roleType = 'patient';
         roleData = await (new PatientModel({ user: newUser, studies: studies })).save();
@@ -65,14 +65,14 @@ exports.createUser = async (attributes) => {
     };
 
     const token = jwt.sign({
-        id: newUser._id
+      user: newUser
     }, process.env.SECRET_KEY, {
-        expiresIn: 86400 // expires in 24 hours
+      expiresIn: 86400 // expires in 24 hours
     });
 
     console.log(newUser, roleType, roleData, token);
 
-    return {user: newUser, roleType: roleData, accessToken: token};
+    return { user: newUser, roleType: roleData, accessToken: token };
   } catch (e) {
     throw Error(e);
   }
@@ -83,11 +83,11 @@ exports.createUser = async (attributes) => {
 exports.updateUser = async (id, attributes) => {
   try {
     console.log(attributes);
-    const { dni, name, lastname, birthday, email, role } = attributes;
+    const { dni, name, lastname, birthday, email } = attributes;
 
     return UserModel.findOneAndUpdate(
       { _id: id },
-      { dni, name, lastname, birthday, email, role },
+      { dni, name, lastname, birthday, email },
       { new: true }
     );
   } catch (e) {
@@ -131,7 +131,7 @@ exports.login = async (email, password) => {
     user.password = undefined;
 
     const token = jwt.sign({
-      id: user._id
+      user: user
     }, process.env.SECRET_KEY, {
       expiresIn: 86400 // expires in 24 hours
     });

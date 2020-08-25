@@ -1,6 +1,5 @@
 'use strict'
 
-const Helper = require('../helpers/index.js');
 const RecipeModel = require('../models/recipe');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
@@ -19,12 +18,11 @@ exports.getRecipeById = async (id) => {
   } catch (e) {
     throw Error(e);
   };
-}
+};
 
-// TODO hacer servicio para upload de archivos
-exports.createRecipe = async (files, attributes) => {
+exports.createRecipe = async (files, attributes, user) => {
   try {
-    console.log(attributes);
+    console.log(files, attributes, user);
 
     if (!files) {
       throw Error("Recipe attached file is required");
@@ -33,41 +31,66 @@ exports.createRecipe = async (files, attributes) => {
     const { patientId, professionalId, description, date = (new Date()) } = attributes;
     const patient = await PatientModel.find({ _id: patientId });
     const professional = await ProfessionalModel.find({ _id: professionalId });
+    const filesArray = [];
 
-    // move file yo /upload path
-    files.recipeFile.mv('./uploads/' + files.recipeFile.name);
+    // convertir a array
+    files.recipeFiles = !Array.isArray(files.recipeFiles)
+      ? [files.recipeFiles]
+      : files.recipeFiles;
 
-    const newRecipe = await RecipeModel.create({
+    // crear receta
+    let newRecipe = await RecipeModel.create({
       patient: patient,
       professional: professional,
       description: description,
-      file: {
-        name: files.recipeFile.name,
-        mimetype: files.recipeFile.mimetype,
-        size: files.recipeFile.size
-      },
       date: date,
-      createdByUser: {}
+      files: [],
+      createdByUser: user
     });
 
-    console.log(newRecipe);
+    files.recipeFiles.map(file => {
+      file.mv(`./public/uploads/recipes/${newRecipe._id}/${file.name}`);
+
+      filesArray.push({
+        name: file.name,
+        mimetype: file.mimetype,
+        size: file.size
+      });
+    });
+
+    // agregar archivos adjuntos
+    newRecipe = await RecipeModel.findOneAndUpdate(
+      { _id: newRecipe._id },
+      { files: filesArray },
+      { new: true }
+    );
+
     return newRecipe;
   } catch (e) {
     throw Error(e);
   }
-}
+};
 
 // TODO mejorar validación cuando un campo es undefined (no alcanza con destructurar attributes)
-exports.updateRecipe = async (id, attributes) => {
+// TODO actualizar archivos
+exports.updateRecipe = async (id, files, attributes) => {
   try {
-    console.log(attributes);
-    const { description, url } = attributes;
+    console.log(files, attributes);
+
+    const { description } = attributes;
+
+    if (files) {
+      const filesArray = [];
+      files.recipeFiles = !Array.isArray(files.recipeFiles)
+        ? [files.recipeFiles]
+        : files.recipeFiles;
+    }
+
 
     return user.findOneAndUpdate(
       { _id: id },
       {
         description: description,
-        url: url
       },
       { new: true }
     );
@@ -85,4 +108,4 @@ exports.deleteRecipe = async (id) => {
   } catch (e) {
     throw Error(e);
   }
-}
+};

@@ -25,7 +25,7 @@ exports.getRecipeById = async (req, res, next) => {
 
 exports.createRecipe = async (req, res, next) => {
   try {
-      const recipe = await recipeService.createRecipe(req.files, req.body);
+      const recipe = await recipeService.createRecipe(req.files, req.body, req.user);
       console.log(recipe);
       return res.status(200).json({status: 200, data: recipe});
   } catch (e) {
@@ -35,7 +35,7 @@ exports.createRecipe = async (req, res, next) => {
 
 exports.updateRecipe = async (req, res, next) => {
   try {
-      const recipe = await recipeService.updateRecipe(req.params.id, req.body);
+      const recipe = await recipeService.updateRecipe(req.params.id, req.files, req.body);
       console.log(recipe);
       return res.status(200).json({status: 200, data: recipe});
   } catch (e) {
