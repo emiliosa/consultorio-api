@@ -315,7 +315,11 @@ db.recipes.insertMany([
       }
     },
     "description": "Clonazepam 1.5gr, 3 veces x día, cada 8hs",
-    "url": "https://s3-us-west-2.amazonaws.com/consultorio.s3.webbucket/recetas/32434920fdjifdanl32956563.pdf",
+    "file": {
+      "name": "prueba",
+      "mimetype": "application/pdf",
+      "size": "500kb"
+    },
     "createdByUser": {
       "_id": ObjectId("5da39f17122830a9688ec9f1"),
     },

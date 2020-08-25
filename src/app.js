@@ -2,15 +2,27 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-var cors = require('cors');
+const cors = require('cors');
 const app = express();
 const routes = require('./routes/index');
+const multer = require('multer');
+const morgan = require('morgan');
+const fileUpload = require('express-fileupload');
 
 //cargar middlewares
-//un metodo que se ejecuta antes que llegue a un controlador
+
 //Configuramos bodyParser para que convierta el body de nuestras peticiones a JSON
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// definir directorio público
+app.use(express.static(__dirname + '/public'));
+
+// enable files upload
+app.use(fileUpload({ createParentPath: true }));
+
+// enable morgan
+app.use(morgan('dev'));
 
 // cors
 app.use(cors())
@@ -23,12 +35,11 @@ app.use(cors())
 //   next();
 // });
 
-// Cargamos las rutas
-app.use('/api', routes);
-
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-// exportamos este módulo para poder usar la variable app fuera de este archivo
+// app routes
+app.use('/api', routes);
+
 module.exports = app;

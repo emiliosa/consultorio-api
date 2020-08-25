@@ -35,7 +35,7 @@ api.delete('/recipes/:id', recipeController.deleteRecipe);
 // listar turnos
 api.get('/appointments/', appointmentController.getAppointments);
 // ver turno
-api.get('/appointments/:id', appointmentController.getAppointments);
+api.get('/appointments/:id', appointmentController.getAppointmentById);
 // crear turno
 api.post('/appointments/', appointmentController.createAppointment);
 // agregar datos a turno

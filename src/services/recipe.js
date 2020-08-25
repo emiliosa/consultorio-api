@@ -1,5 +1,6 @@
 'use strict'
 
+const Helper = require('../helpers/index.js');
 const RecipeModel = require('../models/recipe');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
@@ -21,19 +22,30 @@ exports.getRecipeById = async (id) => {
 }
 
 // TODO hacer servicio para upload de archivos
-exports.createRecipe = async (attributes) => {
+exports.createRecipe = async (files, attributes) => {
   try {
     console.log(attributes);
 
-    const { patientId, professionalId, description, url, date = (new Date()) } = attributes;
+    if (!files) {
+      throw Error("Recipe attached file is required");
+    }
+
+    const { patientId, professionalId, description, date = (new Date()) } = attributes;
     const patient = await PatientModel.find({ _id: patientId });
     const professional = await ProfessionalModel.find({ _id: professionalId });
+
+    // move file yo /upload path
+    files.recipeFile.mv('./uploads/' + files.recipeFile.name);
 
     const newRecipe = await RecipeModel.create({
       patient: patient,
       professional: professional,
       description: description,
-      url: url,
+      file: {
+        name: files.recipeFile.name,
+        mimetype: files.recipeFile.mimetype,
+        size: files.recipeFile.size
+      },
       date: date,
       createdByUser: {}
     });
