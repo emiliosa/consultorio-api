@@ -109,10 +109,13 @@ exports.updateUserPassword = async (id, password) => {
 
 exports.deleteUser = async (id) => {
   try {
-    console.log(id);
-    const deleted = await UserModel.findOneAndDelete({ _id: id });
-    console.log(deleted);
-    return deleted;
+    // console.log(id);
+    // const deleted = await UserModel.findOneAndDelete({ _id: id });
+    // console.log(deleted);
+    // return deleted;
+    const inactived = await UserModel.findOneAndUpdate({ _id: id }, {status: 'Inactivo'}, {new: true});
+    console.log(inactived);
+    return inactived;
   } catch (e) {
     throw Error(e);
   }

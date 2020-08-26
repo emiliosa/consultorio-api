@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const { ObjectId } = require('mongoose');
+const statusEnum = ['Activo', 'Inactivo'];
 
 // validations
 const validateEmail = (email) => {
@@ -23,6 +24,7 @@ const UserSchema = mongoose.Schema({
   email: { type: String, unique: true, required: true, validate: [validateEmail, 'Syntax is not valid'] },
   password: { type: String, required: true },
   role: { type: JSON, required: true },
+  status: {type: String, enum: statusEnum, default: 'Activo', required: true}
 });
 
 // plugins

@@ -3,6 +3,7 @@
 const RecipeModel = require('../models/recipe');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
+const fs = require('fs');
 
 exports.getRecipes = async (query, page, limit) => {
   try {
@@ -117,8 +118,14 @@ exports.getFile = async (id, filename) => {
 
 exports.deleteRecipe = async (id) => {
   try {
-    console.log(id);
     const deleted = await RecipeModel.findOneAndDelete({ _id: id });
+    
+    if (!deleted) {
+      throw Error("Receta inválida");
+    }
+
+    deleted.files.map(file => fs.unlinkSync(`${process.env.UPLOAD_PATH}/recipes/${id}/${file.name}`));
+
     console.log(deleted);
     return deleted;
   } catch (e) {
