@@ -29,14 +29,16 @@ exports.createRecipe = async (files, attributes, user) => {
     }
 
     const { patientId, professionalId, description, date = (new Date()) } = attributes;
-    const patient = await PatientModel.find({ _id: patientId });
-    const professional = await ProfessionalModel.find({ _id: professionalId });
+    const patient = await PatientModel.findOne({ _id: patientId });
+    const professional = await ProfessionalModel.findOne({ _id: professionalId });
     const filesArray = [];
 
     // convertir a array
     files.recipeFiles = !Array.isArray(files.recipeFiles)
       ? [files.recipeFiles]
       : files.recipeFiles;
+
+    console.log(patient, professional, files.recipeFiles);
 
     // crear receta
     let newRecipe = await RecipeModel.create({
@@ -98,6 +100,20 @@ exports.updateRecipe = async (id, files, attributes) => {
     throw Error(e);
   }
 }
+
+exports.getFile = async (id, filename) => {
+  try {
+    const recipe = await RecipeModel.findOne({_id : id});
+
+    if (!recipe) {
+      throw Error("Receta inválida");
+    }
+
+    return `${process.env.UPLOAD_PATH}/recipes/${id}/${filename}`;
+  } catch (e) {
+    throw Error(e);
+  }
+};
 
 exports.deleteRecipe = async (id) => {
   try {

@@ -7,6 +7,8 @@ const mailService = require('./mail');
 const moment = require('moment');
 const newAppointmentTemplate = require('../templates/mail/appointment/newAppointment.js');
 const updateAppointmentTemplate = require('../templates/mail/appointment/updateAppointment.js');
+const fileSystem = require('fs');
+const path = require('path');
 
 exports.getAppointments = async (query, page, limit) => {
   try {
@@ -18,7 +20,18 @@ exports.getAppointments = async (query, page, limit) => {
 
 exports.getAppointmentById = async (id) => {
   try {
-    return await AppointmentModel.find({ _id: id });
+    const appointment = await AppointmentModel.findOne({ _id: id });
+    const {files} = appointment;
+
+    files.map(file => {
+      var pathName = __dirname + "../../public/uploads/" + appointment._id;
+      var filePath = path.join(pathName , file.name);
+      var stat = fileSystem.statSync(filePath);
+      
+    });
+    
+    // appointment.
+    return appointment;
   } catch (e) {
     throw Error(e);
   };
@@ -38,7 +51,7 @@ exports.createAppointment = async (attributes, user) => {
       professional: professional,
       date: new Date(date),
       description: description,
-      status: 'Pendiente',
+      // status: 'Pendiente',
       createdByUser: user
     });
 
@@ -100,9 +113,10 @@ exports.updateAppointment = async (id, attributes) => {
 exports.deleteAppointment = async (id) => {
   try {
     console.log(id);
-    const deleted = await AppointmentModel.findOneAndDelete({ _id: id });
-    console.log(deleted);
-    return deleted;
+    // const deleted = await AppointmentModel.findOneAndDelete({ _id: id });
+    const canceled = await AppointmentModel.findOneAndUpdate({ _id: id }, {status: 'Cancelado'}, {new: true});
+    console.log(canceled);
+    return canceled;
   } catch (e) {
     throw Error(e);
   }

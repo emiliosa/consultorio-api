@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const routes = require('./routes/index');
-const multer = require('multer');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 

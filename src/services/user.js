@@ -30,7 +30,7 @@ exports.createUser = async (attributes) => {
 
     console.log(attributes);
 
-    const { dni, name, lastname, birthday, email, password, role, studies, speciality } = attributes;
+    const { dni, name, lastname, birthday, email, password, role, studies, speciality, licenseNumber } = attributes;
     const hashedPassword = bcrypt.hashSync(password, 8);
 
     const newUser = await UserModel.create({
@@ -50,7 +50,7 @@ exports.createUser = async (attributes) => {
         break;
       case 'Profesional':
         roleType = 'professional';
-        roleData = await (new ProfessionalModel({ user: newUser, speciality: speciality })).save();
+        roleData = await (new ProfessionalModel({ user: newUser, speciality: speciality, licenseNumber: licenseNumber })).save();
         break;
       case 'Administrativo':
         roleType = 'administrative';

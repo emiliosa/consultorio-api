@@ -1,5 +1,7 @@
 const db = require('mongoose');
 
+// password sin hash: prueba123
+
 db.roles.insertMany([
   {
     "_id": ObjectId("5da39f17122830a9688ec9d0"),
@@ -51,9 +53,7 @@ db.calendar.insertMany([
     "professional": {
       "name": "Jack",
       "lastname": "Daniels",
-      "speciality": {
-        "name": "Traumatología"
-      }
+      "speciality": "Traumatología"
     }
   },
   {
@@ -66,9 +66,7 @@ db.calendar.insertMany([
     "professional": {
       "name": "Jack",
       "lastname": "Daniels",
-      "speciality": {
-        "name": "Traumatología"
-      }
+      "speciality": "Traumatología"
     }
   },
   {
@@ -81,9 +79,7 @@ db.calendar.insertMany([
     "professional": {
       "name": "Jack",
       "lastname": "Daniels",
-      "speciality": {
-        "name": "Traumatología"
-      }
+      "speciality": "Traumatología"
     }
   },
   {
@@ -96,9 +92,7 @@ db.calendar.insertMany([
     "professional": {
       "name": "Disney",
       "lastname": "Landia Rodriguez",
-      "speciality": {
-        "name": "Cardiología"
-      }
+      "speciality": "Cardiología"
     }
   }
 ]);
@@ -111,7 +105,7 @@ db.users.insertMany([
     "bithday": ISODate("1984-04-26"),
     "dni": 10000000,
     "email": "pepe.argento@hotmail.com",
-    "password": "qwerty1234567890",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Paciente"
   },
   {
@@ -121,7 +115,7 @@ db.users.insertMany([
     "bithday": ISODate("1984-04-26"),
     "dni": 10000001,
     "email": "alverso.fernandez@hotmail.com",
-    "password": "qwerty1234567890",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Profesional"
   },
   {
@@ -131,7 +125,7 @@ db.users.insertMany([
     "bithday": ISODate("1994-07-07"),
     "dni": 10000002,
     "email": "romina.malaspina@hotmail.com",
-    "password": "qwerty1234567890",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Administrativo"
   },
   {
@@ -141,8 +135,68 @@ db.users.insertMany([
     "bithday": ISODate("1984-04-26"),
     "dni": 10000003,
     "email": "emiliano.abarca@hotmail.com",
-    "password": "qwerty1234567890",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Admin"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9a4"),
+    "name": "Tomás",
+    "lastname": "Orduna #1",
+    "bithday": ISODate("1964-04-26"),
+    "dni": 15098765,
+    "email": "tomas.orduna1@hotmail.com",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+    "role": "Profesional"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9a5"),
+    "name": "Tomás",
+    "lastname": "Orduna #2",
+    "bithday": ISODate("1964-04-26"),
+    "dni": 15098766,
+    "email": "tomas.orduna2@hotmail.com",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+    "role": "Profesional"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9a6"),
+    "name": "Tomás",
+    "lastname": "Orduna #3",
+    "bithday": ISODate("1964-04-26"),
+    "dni": 15098767,
+    "email": "tomas.orduna3@hotmail.com",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+    "role": "Profesional"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9a7"),
+    "name": "Tomás",
+    "lastname": "Orduna #4",
+    "bithday": ISODate("1964-04-26"),
+    "dni": 15098768,
+    "email": "tomas.orduna4@hotmail.com",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+    "role": "Profesional"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9a8"),
+    "name": "Bruce",
+    "lastname": "Banner",
+    "bithday": ISODate("1984-01-01"),
+    "dni": 30000000,
+    "email": "bruce.banner@hotmail.com",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+    "role": "Paciente"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9a9"),
+    "name": "Tony",
+    "lastname": "Stark",
+    "bithday": ISODate("1984-01-01"),
+    "dni": 30000001,
+    "email": "Tony.Stark@hotmail.com",
+    "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+    "role": "Paciente"
   }
 ]);
 
@@ -156,25 +210,66 @@ db.patients.insertMany([
       "bithday": ISODate("1984-04-26"),
       "dni": 10000000,
       "email": "pepe.argento@hotmail.com",
-      "password": "qwerty1234567890",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente"
     },
     "studies": [
       {
-        "speciality": {
-          "name": "Traumatología"
-        },
+        "speciality": "Traumatología",
         "date": ISODate("2020-04-01"),
         "description": "Resonancia de rodilla derecha",
         "result": "No muestra anomalías"
       }
     ],
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9b1"),
+    "user": {
+      "_id": ObjectId("5da39f17122830a9688ec9a8"),
+      "name": "Bruce",
+      "lastname": "Banner",
+      "bithday": ISODate("1984-01-01"),
+      "dni": 30000000,
+      "email": "bruce.banner@hotmail.com",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+      "role": "Paciente"
+    },
+    "studies": [
+      {
+        "speciality": "Traumatología",
+        "date": ISODate("2020-04-01"),
+        "description": "Resonancia de rodilla derecha #2",
+        "result": "No muestra anomalías"
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9b2"),
+    "user": {
+      "_id": ObjectId("5da39f17122830a9688ec9a9"),
+      "name": "Tony",
+      "lastname": "Stark",
+      "bithday": ISODate("1984-01-01"),
+      "dni": 30000001,
+      "email": "Tony.Stark@hotmail.com",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+      "role": "Paciente"
+    },
+    "studies": [
+      {
+        "speciality": "Traumatología",
+        "date": ISODate("2020-04-01"),
+        "description": "Resonancia de rodilla derecha #2",
+        "result": "No muestra anomalías"
+      }
+    ]
   }
 ]);
 
 db.professionals.insertMany([
   {
     "_id": ObjectId("5da39f17122830a9688ec9c0"),
+    "licenseNumber": "000054",
     "user": {
       "_id": ObjectId("5da39f17122830a9688ec9a1"),
       "name": "Alverso",
@@ -182,12 +277,70 @@ db.professionals.insertMany([
       "bithday": ISODate("1984-04-26"),
       "dni": 10000001,
       "email": "alverso.fernandez@hotmail.com",
-      "password": "qwerty1234567890",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional"
     },
-    "speciality": {
-      "name": "Traumatología"
-    }
+    "speciality": "Traumatología"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9c1"),
+    "licenseNumber": "000055",
+    "user": {
+      "_id": ObjectId("5da39f17122830a9688ec9a4"),
+      "name": "Tomás",
+      "lastname": "Orduna #1",
+      "bithday": ISODate("1964-04-26"),
+      "dni": 15098765,
+      "email": "tomas.orduna1@hotmail.com",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+      "role": "Profesional"
+    },
+    "speciality": "Clínico"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9c2"),
+    "licenseNumber": "000056",
+    "user": {
+      "_id": ObjectId("5da39f17122830a9688ec9a5"),
+      "name": "Tomás",
+      "lastname": "Orduna #2",
+      "bithday": ISODate("1964-04-26"),
+      "dni": 15098766,
+      "email": "tomas.orduna2@hotmail.com",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+      "role": "Profesional"
+    },
+    "speciality": "Cardiología"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9c3"),
+    "licenseNumber": "000056",
+    "user": {
+      "_id": ObjectId("5da39f17122830a9688ec9a6"),
+      "name": "Tomás",
+      "lastname": "Orduna #3",
+      "bithday": ISODate("1964-04-26"),
+      "dni": 15098767,
+      "email": "tomas.orduna3@hotmail.com",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+      "role": "Profesional"
+    },
+    "speciality": "Dermatología"
+  },
+  {
+    "_id": ObjectId("5da39f17122830a9688ec9c4"),
+    "licenseNumber": "000058",
+    "user": {
+      "_id": ObjectId("5da39f17122830a9688ec9a7"),
+      "name": "Tomás",
+      "lastname": "Orduna #4",
+      "bithday": ISODate("1964-04-26"),
+      "dni": 15098768,
+      "email": "tomas.orduna4@hotmail.com",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
+      "role": "Profesional"
+    },
+    "speciality": "Clínico"
   }
 ]);
 
@@ -201,7 +354,7 @@ db.administratives.insertMany([
       "bithday": ISODate("1994-07-07"),
       "dni": 10000002,
       "email": "romina.malaspina@hotmail.com",
-      "password": "qwerty1234567890",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Administrativo"
     }
   }
@@ -216,7 +369,7 @@ db.admins.insertMany([
       "bithday": ISODate("1984-04-26"),
       "dni": 10000003,
       "email": "emiliano.abarca@hotmail.com",
-      "password": "qwerty1234567890",
+      "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Admin"
     }
   }
@@ -234,14 +387,12 @@ db.appointments.insertMany([
         "bithday": ISODate("1984-04-26"),
         "dni": 10000000,
         "email": "pepe.argento@hotmail.com",
-        "password": "qwerty1234567890",
+        "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente"
       },
       "studies": [
         {
-          "speciality": {
-            "name": "Traumatología"
-          },
+          "speciality": "Traumatología",
           "date": ISODate("2020-04-01"),
           "description": "Resonancia de rodilla derecha",
           "result": "No muestra anomalías"
@@ -257,12 +408,10 @@ db.appointments.insertMany([
         "bithday": ISODate("1984-04-26"),
         "dni": 10000001,
         "email": "alverso.fernandez@hotmail.com",
-        "password": "qwerty1234567890",
+        "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional"
       },
-      "speciality": {
-        "name": "Traumatología"
-      }
+      "speciality": "Traumatología"
     },
     "date": ISODate("2020-06-01 08:00:00"),
     "status": "Presente",
@@ -284,14 +433,12 @@ db.recipes.insertMany([
         "bithday": ISODate("1984-04-26"),
         "dni": 10000000,
         "email": "pepe.argento@hotmail.com",
-        "password": "qwerty1234567890",
+        "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente"
       },
       "studies": [
         {
-          "speciality": {
-            "name": "Traumatología"
-          },
+          "speciality": "Traumatología",
           "date": ISODate("2020-04-01"),
           "description": "Resonancia de rodilla derecha",
           "result": "No muestra anomalías"
@@ -307,12 +454,10 @@ db.recipes.insertMany([
         "bithday": ISODate("1984-04-26"),
         "dni": 10000001,
         "email": "alverso.fernandez@hotmail.com",
-        "password": "qwerty1234567890",
+        "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional"
       },
-      "speciality": {
-        "name": "Traumatología"
-      }
+      "speciality": "Traumatología"
     },
     "description": "Clonazepam 1.5gr, 3 veces x día, cada 8hs",
     "file": {
