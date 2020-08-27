@@ -5,6 +5,7 @@ const AdministrativeModel = require('../models/administrative');
 const ProfessionalModel = require('../models/professional');
 const AdminModel = require('../models/admin');
 const PatientModel = require('../models/patient');
+const ObjectId = require('mongoose').Types.ObjectId;
 const MailService = require('./mail');
 const ForgotPasswordTemplate = require('../templates/mail/user/forgotPassword.js');
 const bcrypt = require('bcryptjs');
@@ -131,7 +132,7 @@ exports.deleteUser = async (id) => {
 
 exports.login = async (email, password) => {
   try {
-    let roleType, roleData = {};
+    let roleData = {};
     const user = await UserModel.findOne({
       email: email
     });
@@ -140,30 +141,26 @@ exports.login = async (email, password) => {
       throw Error("Invalid username/password")
     }
 
-    // switch (user.role) {
-    //   case 'Paciente':
-    //     roleType = 'patient';
-    //     roleData = await PatientModel.findOne({ user: user, studies: studies });
-    //     // user.patient = patient;
-    //     break;
-    //   case 'Profesional':
-    //     roleType = 'professional';
-    //     roleData = await ProfessionalModel.findOne({ user: user, speciality: speciality, licenseNumber: licenseNumber })).save();
-    //     // user.professional = professional;
-    //     break;
-    //   case 'Administrativo':
-    //     roleType = 'administrative';
-    //     roleData = await (new AdministrativeModel({ user: user })).save();
-    //     // user.administrative = administrative;
-    //     break;
-    //   case 'Admin':
-    //     roleType = 'admin';
-    //     roleData = await (new AdminModel({ user: user })).save();
-    //     // user.admin = admin;
-    //     break;
-    //   default:
-    //     throw Error('Role not found');
-    // };
+    switch (user.role) {
+      case 'Paciente':
+        roleData = await PatientModel.findOne({ "user._id": ObjectId(user._id) });
+        user.patient = roleData;
+        break;
+      case 'Profesional':
+        roleData = await ProfessionalModel.findOne({ "user._id": ObjectId(user._id) });
+        user.professional = roleData;
+        break;
+      case 'Administrativo':
+        roleData = await AdministrativeModel.findOne({ "user._id": ObjectId(user._id) });
+        user.administrative = roleData;
+        break;
+      case 'Admin':
+        roleData = await AdminModel.findOne({ "user._id": ObjectId(user._id) });
+        user.admin = roleData;
+        break;
+      default:
+        throw Error('Role not found');
+    };
 
     user.password = undefined;
 

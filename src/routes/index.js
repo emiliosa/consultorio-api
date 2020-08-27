@@ -53,6 +53,8 @@ api.delete('/appointments/:id', authMiddleware.authCallback, AppointmentControll
 
 // listar pacientes
 api.get('/patients/', authMiddleware.authCallback, PatientController.getPatients);
+// ver paciente
+api.get('/patients/:id', authMiddleware.authCallback, PatientController.getPatientById);
 // listar profesionales
 api.get('/professionals/', authMiddleware.authCallback, ProfessionalController.getProfessionals);
 

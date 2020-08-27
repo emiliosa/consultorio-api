@@ -14,7 +14,7 @@ const path = require('path');
 exports.getAppointments = async (filters, page, limit) => {
   try {
     let query = {};
-    let { patient, professional } = filters;
+    let { patient, professional, date } = filters;
 
     if (patient && patient.userId) {
       query = {
@@ -28,6 +28,20 @@ exports.getAppointments = async (filters, page, limit) => {
       };
     }
 
+    if (date && date === 'today') {
+      const from = moment().startOf('day');
+      const to = moment(from).endOf('day').toDate();
+      query = {
+        date: {
+          "$gte": from,
+          "$lte": to,
+        },
+        ...query
+      };
+    }
+
+    console.log(query);
+
     return await AppointmentModel.paginate(query, { page, limit });
   } catch (e) {
     throw Error(e);
@@ -39,12 +53,12 @@ exports.getAppointmentById = async (id) => {
     const appointment = await AppointmentModel.findOne({ _id: id });
     const { files } = appointment;
 
-    files.map(file => {
-      var pathName = __dirname + "../../public/uploads/" + appointment._id;
-      var filePath = path.join(pathName, file.name);
-      var stat = fileSystem.statSync(filePath);
+    // files.map(file => {
+    //   var pathName = __dirname + "../../public/uploads/" + appointment._id;
+    //   var filePath = path.join(pathName, file.name);
+    //   var stat = fileSystem.statSync(filePath);
 
-    });
+    // });
 
     // appointment.
     return appointment;
@@ -98,6 +112,8 @@ exports.updateAppointment = async (id, attributes) => {
     const patientFullname = appointment.patient.user.name + " " + appointment.patient.user.lastname;
     const professionalFullname = appointment.professional.user.name + " " + appointment.professional.user.lastname;
     const newAttributes = {};
+
+    console.log("date: ", date);
 
     if (date !== undefined && date !== appointment.date) {
       newAttributes.date = date;
