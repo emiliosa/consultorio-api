@@ -57,6 +57,8 @@ api.get('/patients/', authMiddleware.authCallback, PatientController.getPatients
 api.get('/patients/:id', authMiddleware.authCallback, PatientController.getPatientById);
 // agregar antecedentes médicos
 api.put('/patients/:id/medical-history', authMiddleware.authCallback, PatientController.addMedicalHistory);
+// eliminar antecedentes médicos
+api.delete('/patients/:id/medical-history/:medicalHistoryId', authMiddleware.authCallback, PatientController.removeMedicalHistory);
 // listar profesionales
 api.get('/professionals/', authMiddleware.authCallback, ProfessionalController.getProfessionals);
 

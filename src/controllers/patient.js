@@ -30,3 +30,12 @@ exports.addMedicalHistory = async (req, res, next) => {
     return res.status(400).json({ status: 400, message: e.message });
   }
 };
+
+exports.removeMedicalHistory = async (req, res, next) => {
+  try {
+    const user = await PatientService.removeMedicalHistory(req.params.id, req.params.medicalHistoryId);
+    return res.status(200).json({ status: 200, data: user });
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+};
