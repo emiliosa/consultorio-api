@@ -3,6 +3,7 @@
 const AppointmentModel = require('../models/appointment');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
+const ObjectId = require('mongoose').Types.ObjectId;
 const MailService = require('./mail');
 const moment = require('moment');
 const NewAppointmentTemplate = require('../templates/mail/appointment/newAppointment.js');
@@ -10,8 +11,23 @@ const UpdateAppointmentTemplate = require('../templates/mail/appointment/updateA
 const fileSystem = require('fs');
 const path = require('path');
 
-exports.getAppointments = async (query, page, limit) => {
+exports.getAppointments = async (filters, page, limit) => {
   try {
+    let query = {};
+    let { patient, professional } = filters;
+
+    if (patient && patient.userId) {
+      query = {
+        "patient.user._id": ObjectId(patient.userId)
+      };
+    }
+
+    if (professional && professional.userId) {
+      query = {
+        "professional.user._id": ObjectId(professional.userId)
+      };
+    }
+
     return await AppointmentModel.paginate(query, { page, limit });
   } catch (e) {
     throw Error(e);
@@ -21,15 +37,15 @@ exports.getAppointments = async (query, page, limit) => {
 exports.getAppointmentById = async (id) => {
   try {
     const appointment = await AppointmentModel.findOne({ _id: id });
-    const {files} = appointment;
+    const { files } = appointment;
 
     files.map(file => {
       var pathName = __dirname + "../../public/uploads/" + appointment._id;
-      var filePath = path.join(pathName , file.name);
+      var filePath = path.join(pathName, file.name);
       var stat = fileSystem.statSync(filePath);
-      
+
     });
-    
+
     // appointment.
     return appointment;
   } catch (e) {
@@ -114,7 +130,7 @@ exports.deleteAppointment = async (id) => {
   try {
     console.log(id);
     // const deleted = await AppointmentModel.findOneAndDelete({ _id: id });
-    const canceled = await AppointmentModel.findOneAndUpdate({ _id: id }, {status: 'Cancelado'}, {new: true});
+    const canceled = await AppointmentModel.findOneAndUpdate({ _id: id }, { status: 'Cancelado' }, { new: true });
     console.log(canceled);
     return canceled;
   } catch (e) {

@@ -25,7 +25,6 @@ exports.generateRandomToken = async () => {
     .update(buffer)
     .digest("hex");
 
-  console.log("token generado aleatoriamente: ", token);
   return token;
 };
 

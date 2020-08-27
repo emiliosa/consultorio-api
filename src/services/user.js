@@ -10,6 +10,7 @@ const ForgotPasswordTemplate = require('../templates/mail/user/forgotPassword.js
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Helper = require("../helpers/index.js");
+const patient = require('../models/patient');
 
 exports.getUsers = async (query, page, limit) => {
   try {
@@ -50,18 +51,22 @@ exports.createUser = async (attributes) => {
       case 'Paciente':
         roleType = 'patient';
         roleData = await (new PatientModel({ user: newUser, studies: studies })).save();
+        // newUser.patient = patient;
         break;
       case 'Profesional':
         roleType = 'professional';
         roleData = await (new ProfessionalModel({ user: newUser, speciality: speciality, licenseNumber: licenseNumber })).save();
+        // newUser.professional = professional;
         break;
       case 'Administrativo':
         roleType = 'administrative';
         roleData = await (new AdministrativeModel({ user: newUser })).save();
+        // newUser.administrative = administrative;
         break;
       case 'Admin':
         roleType = 'admin';
         roleData = await (new AdminModel({ user: newUser })).save();
+        // newUser.admin = admin;
         break;
       default:
         throw Error('Role not found');
@@ -126,6 +131,7 @@ exports.deleteUser = async (id) => {
 
 exports.login = async (email, password) => {
   try {
+    let roleType, roleData = {};
     const user = await UserModel.findOne({
       email: email
     });
@@ -133,6 +139,31 @@ exports.login = async (email, password) => {
     if (!bcrypt.compareSync(password, user.password)) {
       throw Error("Invalid username/password")
     }
+
+    // switch (user.role) {
+    //   case 'Paciente':
+    //     roleType = 'patient';
+    //     roleData = await PatientModel.findOne({ user: user, studies: studies });
+    //     // user.patient = patient;
+    //     break;
+    //   case 'Profesional':
+    //     roleType = 'professional';
+    //     roleData = await ProfessionalModel.findOne({ user: user, speciality: speciality, licenseNumber: licenseNumber })).save();
+    //     // user.professional = professional;
+    //     break;
+    //   case 'Administrativo':
+    //     roleType = 'administrative';
+    //     roleData = await (new AdministrativeModel({ user: user })).save();
+    //     // user.administrative = administrative;
+    //     break;
+    //   case 'Admin':
+    //     roleType = 'admin';
+    //     roleData = await (new AdminModel({ user: user })).save();
+    //     // user.admin = admin;
+    //     break;
+    //   default:
+    //     throw Error('Role not found');
+    // };
 
     user.password = undefined;
 
