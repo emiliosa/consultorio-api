@@ -36,6 +36,9 @@ exports.getAppointments = async (filters, page, limit) => {
           "$gte": from,
           "$lte": to,
         },
+        status: {
+          "$ne": "Cancelado"
+        },
         ...query
       };
     }
@@ -53,14 +56,6 @@ exports.getAppointmentById = async (id) => {
     const appointment = await AppointmentModel.findOne({ _id: id });
     const { files } = appointment;
 
-    // files.map(file => {
-    //   var pathName = __dirname + "../../public/uploads/" + appointment._id;
-    //   var filePath = path.join(pathName, file.name);
-    //   var stat = fileSystem.statSync(filePath);
-
-    // });
-
-    // appointment.
     return appointment;
   } catch (e) {
     throw Error(e);
@@ -73,6 +68,11 @@ exports.createAppointment = async (attributes, user) => {
     console.log(attributes, user);
 
     const { patientId, professionalId, description, date } = attributes;
+
+    // const appointment = await AppointmentModel.find({
+
+    // });
+
     const patient = await PatientModel.findOne({ _id: patientId });
     const professional = await ProfessionalModel.findOne({ _id: professionalId });
 

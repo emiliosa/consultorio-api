@@ -10,6 +10,13 @@ const fileUpload = require('express-fileupload');
 
 //cargar middlewares
 
+// Fixed locale
+// app.use(function (req, res, next) {
+//   res.setLocale('es');
+//   next();
+// });
+
+
 //Configuramos bodyParser para que convierta el body de nuestras peticiones a JSON
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
