@@ -15,7 +15,7 @@ exports.getPatients = async (req, res, next) => {
 
 exports.getPatientById = async (req, res, next) => {
   try {
-    const user = await PatientService.getPatient(req.params.id);
+    const user = await PatientService.getPatientById(req.params.id);
     return res.status(200).json({ status: 200, data: user });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
