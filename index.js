@@ -35,7 +35,7 @@ const mongoose = require('mongoose');
 // const connectionString = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authSource=admin`;
 //const connectionString = `${process.env.DB_DRIVER_CLOUD}://${process.env.DB_USER_CLOUD}:${process.env.DB_PASS_CLOUD}@${process.env.DB_HOST_CLOUD}/${process.env.DB_NAME_CLOUD}?retryWrites=true&w=majority&authSource=admin`;
 
-const connectionString = "mongodb+srv://superuser:5QvN2qRnddWAMbxC@tpointeractivas.cchj1.gcp.mongodb.net/TPOInteracticas?retryWrites=true&w=majority&authSource=admin";
+const connectionString = "mongodb+srv://superuser:5QvN2qRnddWAMbxC@tpointeractivas.cchj1.gcp.mongodb.net/TPOInteractivas?retryWrites=true&w=majority&authSource=admin";
 
 
 if (process.env.NODE_ENV === 'development') {
