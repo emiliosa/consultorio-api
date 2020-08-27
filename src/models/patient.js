@@ -7,6 +7,7 @@ const { ObjectId } = require('mongoose');
 const PatientSchema = mongoose.Schema({
   user: { type: JSON, required: true },
   studies: { type: JSON },
+  medicalHistory: { type: Array, default: [] },
 });
 
 PatientSchema.plugin(mongoosePaginate);
