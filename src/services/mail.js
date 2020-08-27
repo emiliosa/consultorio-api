@@ -6,7 +6,6 @@ const pug = require('pug');
 // async..await is not allowed in global scope, must use a wrapper
 exports.send = async (to, subject, text, html) => {
   try {
-    console.log(to, subject, text, html);
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     // const testAccount = await nodemailer.createTestAccount();
@@ -31,11 +30,11 @@ exports.send = async (to, subject, text, html) => {
       html: text, // html body
     });
 
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
     // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   } catch (e) {
     console.error(e);

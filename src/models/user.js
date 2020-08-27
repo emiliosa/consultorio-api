@@ -24,7 +24,9 @@ const UserSchema = mongoose.Schema({
   email: { type: String, unique: true, required: true, validate: [validateEmail, 'Syntax is not valid'] },
   password: { type: String, required: true },
   role: { type: JSON, required: true },
-  status: {type: String, enum: statusEnum, default: 'Activo', required: true}
+  status: {type: String, enum: statusEnum, default: 'Activo', required: true},
+  resetPasswordToken: {type: String, default: ""},
+  resetPasswordExpires: {type: Number, default: 0}
 });
 
 // plugins

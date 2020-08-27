@@ -3,10 +3,10 @@
 const AppointmentModel = require('../models/appointment');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
-const mailService = require('./mail');
+const MailService = require('./mail');
 const moment = require('moment');
-const newAppointmentTemplate = require('../templates/mail/appointment/newAppointment.js');
-const updateAppointmentTemplate = require('../templates/mail/appointment/updateAppointment.js');
+const NewAppointmentTemplate = require('../templates/mail/appointment/newAppointment.js');
+const UpdateAppointmentTemplate = require('../templates/mail/appointment/updateAppointment.js');
 const fileSystem = require('fs');
 const path = require('path');
 
@@ -57,15 +57,15 @@ exports.createAppointment = async (attributes, user) => {
 
     console.log(newAppointment);
 
-    const subject = newAppointmentTemplate.getSubject();
-    const text = newAppointmentTemplate.getText(
+    const subject = NewAppointmentTemplate.getSubject();
+    const text = NewAppointmentTemplate.getText(
       patient.user.name + " " + patient.user.lastname,
       professional.user.name + " " + professional.user.lastname,
       moment(newAppointment.date).format("DD/MM/YYYY HH:mm"),
       newAppointment.description
     );
 
-    mailService.send(patient.user.email, subject, text);
+    MailService.send(patient.user.email, subject, text);
 
     return newAppointment;
   } catch (e) {
@@ -91,8 +91,8 @@ exports.updateAppointment = async (id, attributes) => {
       newAttributes.status = status;
     }
 
-    const subject = updateAppointmentTemplate.getSubject();
-    const text = updateAppointmentTemplate.getText(
+    const subject = UpdateAppointmentTemplate.getSubject();
+    const text = UpdateAppointmentTemplate.getText(
       patientFullname,
       professionalFullname,
       appointment.description,
@@ -100,7 +100,7 @@ exports.updateAppointment = async (id, attributes) => {
       newAttributes.status !== undefined ? newAttributes.status : undefined
     );
 
-    mailService.send(appointment.patient.user.email, subject, text);
+    MailService.send(appointment.patient.user.email, subject, text);
 
     console.log(text, newAttributes);
 

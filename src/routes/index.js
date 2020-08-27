@@ -22,6 +22,10 @@ api.post('/users/', authMiddleware.authCallback, UserController.createUser);
 api.put('/users/:id', authMiddleware.authCallback, UserController.updateUser);
 // eliminar usuario
 api.delete('/users/:id', authMiddleware.authCallback, UserController.deleteUser);
+// enviar mail regenerar password
+api.post('/forgot-password', /*authMiddleware.authCallback,*/ UserController.forgotPassword);
+// resetear passowrd
+api.post('/reset-password/:token', /*authMiddleware.authCallback,*/ UserController.resetPassword);
 
 // listar recetas
 api.get('/recipes/', authMiddleware.authCallback, RecipeController.getRecipes);

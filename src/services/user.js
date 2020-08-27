@@ -5,8 +5,11 @@ const AdministrativeModel = require('../models/administrative');
 const ProfessionalModel = require('../models/professional');
 const AdminModel = require('../models/admin');
 const PatientModel = require('../models/patient');
+const MailService = require('./mail');
+const ForgotPasswordTemplate = require('../templates/mail/user/forgotPassword.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Helper = require("../helpers/index.js");
 
 exports.getUsers = async (query, page, limit) => {
   try {
@@ -18,7 +21,7 @@ exports.getUsers = async (query, page, limit) => {
 
 exports.getUserById = async (id) => {
   try {
-    return await UserModel.find({ '_id': id });
+    return await UserModel.findOne({ '_id': id });
   } catch (e) {
     throw Error(e);
   };
@@ -113,7 +116,7 @@ exports.deleteUser = async (id) => {
     // const deleted = await UserModel.findOneAndDelete({ _id: id });
     // console.log(deleted);
     // return deleted;
-    const inactived = await UserModel.findOneAndUpdate({ _id: id }, {status: 'Inactivo'}, {new: true});
+    const inactived = await UserModel.findOneAndUpdate({ _id: id }, { status: 'Inactivo' }, { new: true });
     console.log(inactived);
     return inactived;
   } catch (e) {
@@ -142,5 +145,60 @@ exports.login = async (email, password) => {
     return { user: user, accessToken: token };
   } catch (e) {
     throw Error(e)
+  }
+};
+
+exports.forgotPassword = async (email) => {
+  try {
+    const user = await UserModel.findOne({ email: email });
+
+    if (!user) {
+      throw Error("Usuario inexistente");
+    }
+
+    const token = await Helper.generateRandomToken();
+    const link = process.env.CLIENT_URL + "/reset-password/" + token;
+    const subject = ForgotPasswordTemplate.getSubject();
+    const text = ForgotPasswordTemplate.getText(user.name + " " + user.lastname, link);
+
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000;
+
+    user.save();
+
+    console.log("usuario actualizado para balquear password: ", user);
+
+    MailService.send(user.email, subject, text);
+
+    return user;
+  } catch (e) {
+    throw Error(e);
+  }
+};
+
+exports.resetPassword = async (token, password) => {
+  try {
+    const user = await UserModel.findOne({
+      resetPasswordToken: token, 
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    console.log(user, token, password);
+
+    if (!user) {
+      throw Error("Token inválido");
+    }
+
+    user.password = bcrypt.hashSync(password, 8);
+    user.resetPasswordToken = "";
+    user.resetPasswordExpires = 0;
+
+    user.save();
+
+    console.log(user);
+
+    return user;
+  } catch (e) {
+    throw Error(e);
   }
 };
