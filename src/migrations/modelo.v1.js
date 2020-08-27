@@ -1,7 +1,6 @@
 const db = require('mongoose');
 
 // password sin hash: prueba123
-// conectar desde docker y popular la base: docker exec -it uade_mongodb mongo "mongodb+srv://tpointeractivas.cchj1.gcp.mongodb.net/TPOInteracticas" --username superuser
 
 db.roles.insertMany([
   {

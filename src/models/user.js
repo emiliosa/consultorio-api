@@ -24,7 +24,13 @@ const UserSchema = mongoose.Schema({
   email: { type: String, unique: true, required: true, validate: [validateEmail, 'Syntax is not valid'] },
   password: { type: String, required: true },
   role: { type: JSON, required: true },
-  status: {type: String, enum: statusEnum, default: 'Activo', required: true}
+  status: { type: String, enum: statusEnum, default: 'Activo', required: true },
+  resetPasswordToken: { type: String, default: "" },
+  resetPasswordExpires: { type: Number, default: 0 },
+  patient: { type: JSON, default: {} },
+  professional: { type: JSON, default: {} },
+  administrative: { type: JSON, default: {} },
+  amin: { type: JSON, default: {} },
 });
 
 // plugins
@@ -32,17 +38,17 @@ UserSchema.plugin(mongoosePaginate);
 
 // hooks
 // UserSchema.pre('validate', function (next) {
-  // console.log("acá estoy: ", this);
-  // next();
-  // const cleanAttributes = (attributes) => {
-  //   for (let attr in attributes) {
-  //     if(attributes[attr] === undefined) {
-  //       delete attributes[attr];
-  //     }
-  //   }
-  
-  //   return attributes;
-  // };
+// console.log("acá estoy: ", this);
+// next();
+// const cleanAttributes = (attributes) => {
+//   for (let attr in attributes) {
+//     if(attributes[attr] === undefined) {
+//       delete attributes[attr];
+//     }
+//   }
+
+//   return attributes;
+// };
 // });
 
 module.exports = mongoose.model('User', UserSchema);

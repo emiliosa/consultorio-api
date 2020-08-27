@@ -3,15 +3,45 @@
 const AppointmentModel = require('../models/appointment');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
-const mailService = require('./mail');
+const ObjectId = require('mongoose').Types.ObjectId;
+const MailService = require('./mail');
 const moment = require('moment');
-const newAppointmentTemplate = require('../templates/mail/appointment/newAppointment.js');
-const updateAppointmentTemplate = require('../templates/mail/appointment/updateAppointment.js');
+const NewAppointmentTemplate = require('../templates/mail/appointment/newAppointment.js');
+const UpdateAppointmentTemplate = require('../templates/mail/appointment/updateAppointment.js');
 const fileSystem = require('fs');
 const path = require('path');
 
-exports.getAppointments = async (query, page, limit) => {
+exports.getAppointments = async (filters, page, limit) => {
   try {
+    let query = {};
+    let { patient, professional, date } = filters;
+
+    if (patient && patient.userId) {
+      query = {
+        "patient.user._id": ObjectId(patient.userId)
+      };
+    }
+
+    if (professional && professional.userId) {
+      query = {
+        "professional.user._id": ObjectId(professional.userId)
+      };
+    }
+
+    if (date && date === 'today') {
+      const from = moment().startOf('day');
+      const to = moment(from).endOf('day').toDate();
+      query = {
+        date: {
+          "$gte": from,
+          "$lte": to,
+        },
+        ...query
+      };
+    }
+
+    console.log(query);
+
     return await AppointmentModel.paginate(query, { page, limit });
   } catch (e) {
     throw Error(e);
@@ -21,15 +51,15 @@ exports.getAppointments = async (query, page, limit) => {
 exports.getAppointmentById = async (id) => {
   try {
     const appointment = await AppointmentModel.findOne({ _id: id });
-    const {files} = appointment;
+    const { files } = appointment;
 
-    files.map(file => {
-      var pathName = __dirname + "../../public/uploads/" + appointment._id;
-      var filePath = path.join(pathName , file.name);
-      var stat = fileSystem.statSync(filePath);
-      
-    });
-    
+    // files.map(file => {
+    //   var pathName = __dirname + "../../public/uploads/" + appointment._id;
+    //   var filePath = path.join(pathName, file.name);
+    //   var stat = fileSystem.statSync(filePath);
+
+    // });
+
     // appointment.
     return appointment;
   } catch (e) {
@@ -57,15 +87,15 @@ exports.createAppointment = async (attributes, user) => {
 
     console.log(newAppointment);
 
-    const subject = newAppointmentTemplate.getSubject();
-    const text = newAppointmentTemplate.getText(
+    const subject = NewAppointmentTemplate.getSubject();
+    const text = NewAppointmentTemplate.getText(
       patient.user.name + " " + patient.user.lastname,
       professional.user.name + " " + professional.user.lastname,
       moment(newAppointment.date).format("DD/MM/YYYY HH:mm"),
       newAppointment.description
     );
 
-    mailService.send(patient.user.email, subject, text);
+    MailService.send(patient.user.email, subject, text);
 
     return newAppointment;
   } catch (e) {
@@ -83,6 +113,8 @@ exports.updateAppointment = async (id, attributes) => {
     const professionalFullname = appointment.professional.user.name + " " + appointment.professional.user.lastname;
     const newAttributes = {};
 
+    console.log("date: ", date);
+
     if (date !== undefined && date !== appointment.date) {
       newAttributes.date = date;
     }
@@ -91,8 +123,8 @@ exports.updateAppointment = async (id, attributes) => {
       newAttributes.status = status;
     }
 
-    const subject = updateAppointmentTemplate.getSubject();
-    const text = updateAppointmentTemplate.getText(
+    const subject = UpdateAppointmentTemplate.getSubject();
+    const text = UpdateAppointmentTemplate.getText(
       patientFullname,
       professionalFullname,
       appointment.description,
@@ -100,7 +132,7 @@ exports.updateAppointment = async (id, attributes) => {
       newAttributes.status !== undefined ? newAttributes.status : undefined
     );
 
-    mailService.send(appointment.patient.user.email, subject, text);
+    MailService.send(appointment.patient.user.email, subject, text);
 
     console.log(text, newAttributes);
 
@@ -114,7 +146,7 @@ exports.deleteAppointment = async (id) => {
   try {
     console.log(id);
     // const deleted = await AppointmentModel.findOneAndDelete({ _id: id });
-    const canceled = await AppointmentModel.findOneAndUpdate({ _id: id }, {status: 'Cancelado'}, {new: true});
+    const canceled = await AppointmentModel.findOneAndUpdate({ _id: id }, { status: 'Cancelado' }, { new: true });
     console.log(canceled);
     return canceled;
   } catch (e) {

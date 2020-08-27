@@ -7,7 +7,8 @@ exports.getRecipes = async (req, res, next) => {
   try {
     const page = req.query.page ? req.query.page : 1
     const limit = req.query.limit ? req.query.limit : 10;
-    const recipes = await recipeService.getRecipes({}, page, limit);
+    const filters = req.query.filters ? req.query.filters : {};
+    const recipes = await recipeService.getRecipes(filters, page, limit);
     return res.status(200).json({ status: 200, data: recipes });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });

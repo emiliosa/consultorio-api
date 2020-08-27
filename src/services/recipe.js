@@ -3,10 +3,26 @@
 const RecipeModel = require('../models/recipe');
 const PatientModel = require('../models/patient');
 const ProfessionalModel = require('../models/professional');
+const ObjectId = require('mongoose').Types.ObjectId;
 const fs = require('fs');
 
-exports.getRecipes = async (query, page, limit) => {
+exports.getRecipes = async (filters, page, limit) => {
   try {
+    let query = {};
+    let { patient, professional } = filters;
+
+    if (patient && patient.userId) {
+      query = {
+        "patient.user._id": ObjectId(patient.userId)
+      };
+    }
+
+    if (professional && professional.userId) {
+      query = {
+        "professional.user._id": ObjectId(professional.userId)
+      };
+    }
+
     return await RecipeModel.paginate(query, { page, limit });
   } catch (e) {
     throw Error(e);

@@ -9,3 +9,11 @@ exports.getPatients = async (query, page, limit) => {
     throw Error(e);
   }
 };
+
+exports.getPatientById = async (id) => {
+  try {
+    return await PatientModel.findOne({_id: id});
+  } catch (e) {
+    throw Error(e);
+  }
+};

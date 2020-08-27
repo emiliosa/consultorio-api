@@ -10,12 +10,9 @@ exports.authCallback = (req, res, next) => {
   }
 
   const token = req.headers.authorization.split(' ')[1];
-  console.log("el token es: ", token);
 
   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     const msg = { auth: false, message: 'Failed to authenticate token.' };
-
-    console.log("token verify: ", err, decoded);
 
     if (err) {
       res.status(500).send(msg);

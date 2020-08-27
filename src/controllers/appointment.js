@@ -1,12 +1,15 @@
 'use strict'
 
-const appointmentService = require('../services/appointment');
+const querystring = require('querystring');
+const AppointmentService = require('../services/appointment');
 
 exports.getAppointments = async (req, res, next) => {
   try {
-    const page = req.query.page ? req.query.page : 1
+    const page = req.query.page ? req.query.page: 1;
     const limit = req.query.limit ? req.query.limit : 10;
-    const appointments = await appointmentService.getAppointments({}, page, limit);
+    const filters = req.query.filters ? req.query.filters : {};
+    const appointments = await AppointmentService.getAppointments(filters, page, limit);
+
     return res.status(200).json({ status: 200, data: appointments });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
@@ -15,7 +18,7 @@ exports.getAppointments = async (req, res, next) => {
 
 exports.getAppointmentById = async (req, res, next) => {
   try {
-    const appointment = await appointmentService.getAppointmentById(req.params.id);
+    const appointment = await AppointmentService.getAppointmentById(req.params.id);
     console.log(appointment);
     return res.status(200).json({ status: 200, data: appointment });
   } catch (e) {
@@ -25,7 +28,7 @@ exports.getAppointmentById = async (req, res, next) => {
 
 exports.createAppointment = async (req, res, next) => {
   try {
-    const appointment = await appointmentService.createAppointment(req.body, req.user);
+    const appointment = await AppointmentService.createAppointment(req.body, req.user);
     console.log(appointment);
     return res.status(200).json({ status: 200, data: appointment });
   } catch (e) {
@@ -35,7 +38,7 @@ exports.createAppointment = async (req, res, next) => {
 
 exports.updateAppointment = async (req, res, next) => {
   try {
-    const appointment = await appointmentService.updateAppointment(req.params.id, req.body);
+    const appointment = await AppointmentService.updateAppointment(req.params.id, req.body);
     console.log(appointment);
     return res.status(200).json({ status: 200, data: appointment });
   } catch (e) {
@@ -45,7 +48,7 @@ exports.updateAppointment = async (req, res, next) => {
 
 exports.deleteAppointment = async (req, res) => {
   try {
-    const appointment = await appointmentService.deleteAppointment(req.params.id);
+    const appointment = await AppointmentService.deleteAppointment(req.params.id);
     console.log(appointment);
     return res.status(200).json({ status: 200, data: appointment });
   } catch (e) {
