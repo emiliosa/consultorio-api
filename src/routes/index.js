@@ -5,6 +5,7 @@ const RecipeController = require('../controllers/recipe');
 const AppointmentController = require('../controllers/appointment');
 const PatientController = require('../controllers/patient');
 const ProfessionalController = require('../controllers/professional');
+const NewsController = require('../controllers/news');
 const api = require('express').Router();
 const authMiddleware = require('../middlewares/authorization');
 
@@ -51,9 +52,6 @@ api.put('/appointments/:id', authMiddleware.authCallback, AppointmentController.
 // eliminar turno
 api.delete('/appointments/:id', authMiddleware.authCallback, AppointmentController.deleteAppointment);
 
-// listar news
-api.get('/news/', authMiddleware.authCallback, AppointmentController.getNews);
-
 // listar pacientes
 api.get('/patients/', authMiddleware.authCallback, PatientController.getPatients);
 // ver paciente
@@ -64,5 +62,16 @@ api.put('/patients/:id/medical-history', authMiddleware.authCallback, PatientCon
 api.delete('/patients/:id/medical-history/:medicalHistoryId', authMiddleware.authCallback, PatientController.removeMedicalHistory);
 // listar profesionales
 api.get('/professionals/', authMiddleware.authCallback, ProfessionalController.getProfessionals);
+
+// listar novedades
+api.get('/news', authMiddleware.authCallback, NewsController.getNews);
+// ver novedad
+api.get('/news/:id', authMiddleware.authCallback, NewsController.getNewById);
+// actualizar novedad
+api.put('/news/:id', authMiddleware.authCallback, NewsController.updateNew);
+// eliminar novedad
+api.delete('/news/:id', authMiddleware.authCallback, NewsController.deleteNew);
+// crear novedad
+api.post('/news/', authMiddleware.authCallback, NewsController.createNew);
 
 module.exports = api;

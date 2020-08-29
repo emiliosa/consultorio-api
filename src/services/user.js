@@ -92,11 +92,28 @@ exports.createUser = async (attributes) => {
 exports.updateUser = async (id, attributes) => {
   try {
     console.log(attributes);
+    let query = {}
     const { dni, name, lastname, birthdate, email } = attributes;
+
+    if (dni) {
+      query = {dni};
+    }
+
+    if (name) {
+      query = {name, ...query};
+    }
+
+    if (birthdate) {
+      query = {birthdate, ...query};
+    }
+
+    if (email) {
+      query = {email, ...query};
+    }
 
     return UserModel.findOneAndUpdate(
       { _id: id },
-      { dni, name, lastname, birthdate, email },
+      { "$set": query },
       { new: true }
     );
   } catch (e) {
