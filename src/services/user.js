@@ -35,13 +35,13 @@ exports.createUser = async (attributes) => {
 
     console.log(attributes);
 
-    const { dni, name, lastname, birthday, email, password, role, studies, speciality, licenseNumber } = attributes;
+    const { dni, name, lastname, birthdate, email, password, role, studies, speciality, licenseNumber } = attributes;
     const hashedPassword = bcrypt.hashSync(password, 8);
 
     const newUser = await UserModel.create({
       name: name,
       lastname: lastname,
-      birthday: new Date(birthday),
+      birthdate: new Date(birthdate),
       dni: dni,
       email: email,
       password: hashedPassword,
@@ -92,11 +92,11 @@ exports.createUser = async (attributes) => {
 exports.updateUser = async (id, attributes) => {
   try {
     console.log(attributes);
-    const { dni, name, lastname, birthday, email } = attributes;
+    const { dni, name, lastname, birthdate, email } = attributes;
 
     return UserModel.findOneAndUpdate(
       { _id: id },
-      { dni, name, lastname, birthday, email },
+      { dni, name, lastname, birthdate, email },
       { new: true }
     );
   } catch (e) {
@@ -122,7 +122,7 @@ exports.deleteUser = async (id) => {
     // const deleted = await UserModel.findOneAndDelete({ _id: id });
     // console.log(deleted);
     // return deleted;
-    const inactived = await UserModel.findOneAndUpdate({ _id: id }, { status: 'Inactivo' }, { new: true });
+    const inactived = await UserModel.findOneAndUpdate({ _id: id }, { status: 'Inhabilitado' }, { new: true });
     console.log(inactived);
     return inactived;
   } catch (e) {
@@ -139,6 +139,10 @@ exports.login = async (email, password) => {
 
     if (!bcrypt.compareSync(password, user.password)) {
       throw Error("Invalid username/password")
+    }
+
+    if (user.status === 'Inhabilitado') {
+      throw Error("Disabled user");
     }
 
     switch (user.role) {

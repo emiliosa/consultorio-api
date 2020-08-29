@@ -102,111 +102,111 @@ db.users.insertMany([
     "_id": ObjectId("5da39f17122830a9688ec9a0"),
     "name": "Pepe",
     "lastname": "Argento",
-    "birthday": ISODate("1984-04-26"),
+    "birthdate": ISODate("1984-04-26"),
     "dni": 10000000,
     "email": "pepe.argento@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Paciente",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a1"),
     "name": "Alverso",
     "lastname": "Fernandez",
-    "birthday": ISODate("1984-04-26"),
+    "birthdate": ISODate("1984-04-26"),
     "dni": 10000001,
     "email": "alverso.fernandez@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Profesional",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a2"),
     "name": "Romina",
     "lastname": "Malaspina",
-    "birthday": ISODate("1994-07-07"),
+    "birthdate": ISODate("1994-07-07"),
     "dni": 10000002,
     "email": "romina.malaspina@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Administrativo",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a3"),
     "name": "Emiliano",
     "lastname": "Abarca",
-    "birthday": ISODate("1984-04-26"),
+    "birthdate": ISODate("1984-04-26"),
     "dni": 10000003,
     "email": "emiliano.abarca@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Admin",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a4"),
     "name": "Tomás",
     "lastname": "Orduna #1",
-    "birthday": ISODate("1964-04-26"),
+    "birthdate": ISODate("1964-04-26"),
     "dni": 15098765,
     "email": "tomas.orduna1@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Profesional",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a5"),
     "name": "Tomás",
     "lastname": "Orduna #2",
-    "birthday": ISODate("1964-04-26"),
+    "birthdate": ISODate("1964-04-26"),
     "dni": 15098766,
     "email": "tomas.orduna2@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Profesional",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a6"),
     "name": "Tomás",
     "lastname": "Orduna #3",
-    "birthday": ISODate("1964-04-26"),
+    "birthdate": ISODate("1964-04-26"),
     "dni": 15098767,
     "email": "tomas.orduna3@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Profesional",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a7"),
     "name": "Tomás",
     "lastname": "Orduna #4",
-    "birthday": ISODate("1964-04-26"),
+    "birthdate": ISODate("1964-04-26"),
     "dni": 15098768,
     "email": "tomas.orduna4@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Profesional",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a8"),
     "name": "Bruce",
     "lastname": "Banner",
-    "birthday": ISODate("1984-01-01"),
+    "birthdate": ISODate("1984-01-01"),
     "dni": 30000000,
     "email": "bruce.banner@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Paciente",
-    "status": "Activo"
+    "status": "Habilitado"
   },
   {
     "_id": ObjectId("5da39f17122830a9688ec9a9"),
     "name": "Tony",
     "lastname": "Stark",
-    "birthday": ISODate("1984-01-01"),
+    "birthdate": ISODate("1984-01-01"),
     "dni": 30000001,
     "email": "Tony.Stark@hotmail.com",
     "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
     "role": "Paciente",
-    "status": "Activo"
+    "status": "Habilitado"
   }
 ]);
 
@@ -217,12 +217,12 @@ db.patients.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a0"),
       "name": "Pepe",
       "lastname": "Argento",
-      "birthday": ISODate("1984-04-26"),
+      "birthdate": ISODate("1984-04-26"),
       "dni": 10000000,
       "email": "pepe.argento@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "studies": [
       {
@@ -239,12 +239,12 @@ db.patients.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a8"),
       "name": "Bruce",
       "lastname": "Banner",
-      "birthday": ISODate("1984-01-01"),
+      "birthdate": ISODate("1984-01-01"),
       "dni": 30000000,
       "email": "bruce.banner@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "studies": [
       {
@@ -261,12 +261,12 @@ db.patients.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a9"),
       "name": "Tony",
       "lastname": "Stark",
-      "birthday": ISODate("1984-01-01"),
+      "birthdate": ISODate("1984-01-01"),
       "dni": 30000001,
       "email": "Tony.Stark@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "studies": [
       {
@@ -287,12 +287,12 @@ db.professionals.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a1"),
       "name": "Alverso",
       "lastname": "Fernandez",
-      "birthday": ISODate("1984-04-26"),
+      "birthdate": ISODate("1984-04-26"),
       "dni": 10000001,
       "email": "alverso.fernandez@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "speciality": "Traumatología"
   },
@@ -303,12 +303,12 @@ db.professionals.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a4"),
       "name": "Tomás",
       "lastname": "Orduna #1",
-      "birthday": ISODate("1964-04-26"),
+      "birthdate": ISODate("1964-04-26"),
       "dni": 15098765,
       "email": "tomas.orduna1@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "speciality": "Clínico"
   },
@@ -319,12 +319,12 @@ db.professionals.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a5"),
       "name": "Tomás",
       "lastname": "Orduna #2",
-      "birthday": ISODate("1964-04-26"),
+      "birthdate": ISODate("1964-04-26"),
       "dni": 15098766,
       "email": "tomas.orduna2@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "speciality": "Cardiología"
   },
@@ -335,12 +335,12 @@ db.professionals.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a6"),
       "name": "Tomás",
       "lastname": "Orduna #3",
-      "birthday": ISODate("1964-04-26"),
+      "birthdate": ISODate("1964-04-26"),
       "dni": 15098767,
       "email": "tomas.orduna3@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "speciality": "Dermatología"
   },
@@ -351,12 +351,12 @@ db.professionals.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a7"),
       "name": "Tomás",
       "lastname": "Orduna #4",
-      "birthday": ISODate("1964-04-26"),
+      "birthdate": ISODate("1964-04-26"),
       "dni": 15098768,
       "email": "tomas.orduna4@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     "speciality": "Clínico"
   }
@@ -369,12 +369,12 @@ db.administratives.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a2"),
       "name": "Romina",
       "lastname": "Malaspina",
-      "birthday": ISODate("1994-07-07"),
+      "birthdate": ISODate("1994-07-07"),
       "dni": 10000002,
       "email": "romina.malaspina@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Administrativo",
-      "status": "Activo"
+      "status": "Habilitado"
     }
   }
 ]);
@@ -385,12 +385,12 @@ db.admins.insertMany([
       "_id": ObjectId("5da39f17122830a9688ec9a3"),
       "name": "Emiliano",
       "lastname": "Abarca",
-      "birthday": ISODate("1984-04-26"),
+      "birthdate": ISODate("1984-04-26"),
       "dni": 10000003,
       "email": "emiliano.abarca@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Admin",
-      "status": "Activo"
+      "status": "Habilitado"
     }
   }
 ]);
@@ -404,12 +404,12 @@ db.appointments.insertMany([
         "_id": ObjectId("5da39f17122830a9688ec9a0"),
         "name": "Pepe",
         "lastname": "Argento",
-        "birthday": ISODate("1984-04-26"),
+        "birthdate": ISODate("1984-04-26"),
         "dni": 10000000,
         "email": "pepe.argento@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "studies": [
         {
@@ -426,16 +426,20 @@ db.appointments.insertMany([
         "_id": ObjectId("5da39f17122830a9688ec9a1"),
         "name": "Alverso",
         "lastname": "Fernandez",
-        "birthday": ISODate("1984-04-26"),
+        "birthdate": ISODate("1984-04-26"),
         "dni": 10000001,
         "email": "alverso.fernandez@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Traumatología"
     },
-    "date": ISODate("2020-06-01 08:00:00"),
+    "date": ISODate("2020-06-01"),
+    "time": {
+      "number": 1,
+      "hour": "09:00"
+    },
     "status": "Presente",
     "createdByUser": {
       "_id": ObjectId("5da39f17122830a9688ec9f1"),
@@ -452,12 +456,12 @@ db.recipes.insertMany([
         "_id": ObjectId("5da39f17122830a9688ec9a0"),
         "name": "Pepe",
         "lastname": "Argento",
-        "birthday": ISODate("1984-04-26"),
+        "birthdate": ISODate("1984-04-26"),
         "dni": 10000000,
         "email": "pepe.argento@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "studies": [
         {
@@ -474,12 +478,12 @@ db.recipes.insertMany([
         "_id": ObjectId("5da39f17122830a9688ec9a1"),
         "name": "Alverso",
         "lastname": "Fernandez",
-        "birthday": ISODate("1984-04-26"),
+        "birthdate": ISODate("1984-04-26"),
         "dni": 10000001,
         "email": "alverso.fernandez@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Traumatología"
     },

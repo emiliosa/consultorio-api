@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const { ObjectId } = require('mongoose');
-const statusEnum = ['Activo', 'Inactivo'];
+const statusEnum = ['Habilitado', 'Inhabilitado'];
 
 // validations
 const validateEmail = (email) => {
@@ -19,12 +19,12 @@ const UserSchema = mongoose.Schema({
   // _id: ObjectId,
   name: { type: String, required: true, validate: [undefinedNotAllowed, 'Undefined value not allowed'] },
   lastname: { type: String, required: true },
-  birthday: { type: Date, required: true },
+  birthdate: { type: Date, required: true },
   dni: { type: Number, required: true },
   email: { type: String, unique: true, required: true, validate: [validateEmail, 'Syntax is not valid'] },
   password: { type: String, required: true },
   role: { type: JSON, required: true },
-  status: { type: String, enum: statusEnum, default: 'Activo', required: true },
+  status: { type: String, enum: statusEnum, default: 'Habilitado', required: true },
   resetPasswordToken: { type: String, default: "" },
   resetPasswordExpires: { type: Number, default: 0 },
   patient: { type: JSON, default: {} },

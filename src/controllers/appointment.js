@@ -6,7 +6,7 @@ const AppointmentService = require('../services/appointment');
 exports.getAppointments = async (req, res, next) => {
   try {
     const page = req.query.page ? req.query.page: 1;
-    const limit = req.query.limit ? req.query.limit : 10;
+    const limit = req.query.limit ? req.query.limit : 100;
     const filters = req.query.filters ? req.query.filters : {};
     const appointments = await AppointmentService.getAppointments(filters, page, limit);
 

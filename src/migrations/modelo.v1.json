@@ -94,111 +94,111 @@
       "_id": "5da39f17122830a9688ec9a0",
       "name": "Pepe",
       "lastname": "Argento",
-      "birthday": "1984-04-26T00:00:00Z",
+      "birthdate": "1984-04-26T00:00:00Z",
       "dni": 10000000,
       "email": "pepe.argento@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a1",
       "name": "Alverso",
       "lastname": "Fernandez",
-      "birthday": "1984-04-26T00:00:00Z",
+      "birthdate": "1984-04-26T00:00:00Z",
       "dni": 10000001,
       "email": "alverso.fernandez@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a2",
       "name": "Romina",
       "lastname": "Malaspina",
-      "birthday": "1994-07-07T00:00:00Z",
+      "birthdate": "1994-07-07T00:00:00Z",
       "dni": 10000002,
       "email": "romina.malaspina@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Administrativo",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a3",
       "name": "Emiliano",
       "lastname": "Abarca",
-      "birthday": "1984-04-26T00:00:00Z",
+      "birthdate": "1984-04-26T00:00:00Z",
       "dni": 10000003,
       "email": "emiliano.abarca@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Admin",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a4",
       "name": "Tomás",
       "lastname": "Orduna #1",
-      "birthday": "1964-04-26T00:00:00Z",
+      "birthdate": "1964-04-26T00:00:00Z",
       "dni": 15098765,
       "email": "tomas.orduna1@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a5",
       "name": "Tomás",
       "lastname": "Orduna #2",
-      "birthday": "1964-04-26T00:00:00Z",
+      "birthdate": "1964-04-26T00:00:00Z",
       "dni": 15098766,
       "email": "tomas.orduna2@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a6",
       "name": "Tomás",
       "lastname": "Orduna #3",
-      "birthday": "1964-04-26T00:00:00Z",
+      "birthdate": "1964-04-26T00:00:00Z",
       "dni": 15098767,
       "email": "tomas.orduna3@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a7",
       "name": "Tomás",
       "lastname": "Orduna #4",
-      "birthday": "1964-04-26T00:00:00Z",
+      "birthdate": "1964-04-26T00:00:00Z",
       "dni": 15098768,
       "email": "tomas.orduna4@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Profesional",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a8",
       "name": "Bruce",
       "lastname": "Banner",
-      "birthday": "1984-01-01T00:00:00Z",
+      "birthdate": "1984-01-01T00:00:00Z",
       "dni": 30000000,
       "email": "bruce.banner@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente",
-      "status": "Activo"
+      "status": "Habilitado"
     },
     {
       "_id": "5da39f17122830a9688ec9a9",
       "name": "Tony",
       "lastname": "Stark",
-      "birthday": "1984-01-01T00:00:00Z",
+      "birthdate": "1984-01-01T00:00:00Z",
       "dni": 30000001,
       "email": "Tony.Stark@hotmail.com",
       "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
       "role": "Paciente",
-      "status": "Activo"
+      "status": "Habilitado"
     }
   ],
   "patients": [
@@ -208,12 +208,12 @@
         "_id": "5da39f17122830a9688ec9a0",
         "name": "Pepe",
         "lastname": "Argento",
-        "birthday": "1984-04-26T00:00:00Z",
+        "birthdate": "1984-04-26T00:00:00Z",
         "dni": 10000000,
         "email": "pepe.argento@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "studies": [
         {
@@ -230,12 +230,12 @@
         "_id": "5da39f17122830a9688ec9a8",
         "name": "Bruce",
         "lastname": "Banner",
-        "birthday": "1984-01-01T00:00:00Z",
+        "birthdate": "1984-01-01T00:00:00Z",
         "dni": 30000000,
         "email": "bruce.banner@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "studies": [
         {
@@ -252,12 +252,12 @@
         "_id": "5da39f17122830a9688ec9a9",
         "name": "Tony",
         "lastname": "Stark",
-        "birthday": "1984-01-01T00:00:00Z",
+        "birthdate": "1984-01-01T00:00:00Z",
         "dni": 30000001,
         "email": "Tony.Stark@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Paciente",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "studies": [
         {
@@ -277,12 +277,12 @@
         "_id": "5da39f17122830a9688ec9a1",
         "name": "Alverso",
         "lastname": "Fernandez",
-        "birthday": "1984-04-26T00:00:00Z",
+        "birthdate": "1984-04-26T00:00:00Z",
         "dni": 10000001,
         "email": "alverso.fernandez@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Traumatología"
     },
@@ -293,12 +293,12 @@
         "_id": "5da39f17122830a9688ec9a4",
         "name": "Tomás",
         "lastname": "Orduna #1",
-        "birthday": "1964-04-26T00:00:00Z",
+        "birthdate": "1964-04-26T00:00:00Z",
         "dni": 15098765,
         "email": "tomas.orduna1@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Clínico"
     },
@@ -309,12 +309,12 @@
         "_id": "5da39f17122830a9688ec9a5",
         "name": "Tomás",
         "lastname": "Orduna #2",
-        "birthday": "1964-04-26T00:00:00Z",
+        "birthdate": "1964-04-26T00:00:00Z",
         "dni": 15098766,
         "email": "tomas.orduna2@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Cardiología"
     },
@@ -325,12 +325,12 @@
         "_id": "5da39f17122830a9688ec9a6",
         "name": "Tomás",
         "lastname": "Orduna #3",
-        "birthday": "1964-04-26T00:00:00Z",
+        "birthdate": "1964-04-26T00:00:00Z",
         "dni": 15098767,
         "email": "tomas.orduna3@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Dermatología"
     },
@@ -341,12 +341,12 @@
         "_id": "5da39f17122830a9688ec9a7",
         "name": "Tomás",
         "lastname": "Orduna #4",
-        "birthday": "1964-04-26T00:00:00Z",
+        "birthdate": "1964-04-26T00:00:00Z",
         "dni": 15098768,
         "email": "tomas.orduna4@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Profesional",
-        "status": "Activo"
+        "status": "Habilitado"
       },
       "speciality": "Clínico"
     }
@@ -358,12 +358,12 @@
         "_id": "5da39f17122830a9688ec9a2",
         "name": "Romina",
         "lastname": "Malaspina",
-        "birthday": "1994-07-07T00:00:00Z",
+        "birthdate": "1994-07-07T00:00:00Z",
         "dni": 10000002,
         "email": "romina.malaspina@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Administrativo",
-        "status": "Activo"
+        "status": "Habilitado"
       }
     }
   ],
@@ -374,12 +374,12 @@
         "_id": "5da39f17122830a9688ec9a3",
         "name": "Emiliano",
         "lastname": "Abarca",
-        "birthday": "1984-04-26T00:00:00Z",
+        "birthdate": "1984-04-26T00:00:00Z",
         "dni": 10000003,
         "email": "emiliano.abarca@hotmail.com",
         "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
         "role": "Admin",
-        "status": "Activo"
+        "status": "Habilitado"
       }
     }
   ],
@@ -392,12 +392,12 @@
           "_id": "5da39f17122830a9688ec9a0",
           "name": "Pepe",
           "lastname": "Argento",
-          "birthday": "1984-04-26T00:00:00Z",
+          "birthdate": "1984-04-26T00:00:00Z",
           "dni": 10000000,
           "email": "pepe.argento@hotmail.com",
           "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
           "role": "Paciente",
-          "status": "Activo"
+          "status": "Habilitado"
         },
         "studies": [
           {
@@ -414,12 +414,12 @@
           "_id": "5da39f17122830a9688ec9a1",
           "name": "Alverso",
           "lastname": "Fernandez",
-          "birthday": "1984-04-26T00:00:00Z",
+          "birthdate": "1984-04-26T00:00:00Z",
           "dni": 10000001,
           "email": "alverso.fernandez@hotmail.com",
           "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
           "role": "Profesional",
-          "status": "Activo"
+          "status": "Habilitado"
         },
         "speciality": "Traumatología"
       },
@@ -439,12 +439,12 @@
           "_id": "5da39f17122830a9688ec9a0",
           "name": "Pepe",
           "lastname": "Argento",
-          "birthday": "1984-04-26T00:00:00Z",
+          "birthdate": "1984-04-26T00:00:00Z",
           "dni": 10000000,
           "email": "pepe.argento@hotmail.com",
           "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
           "role": "Paciente",
-          "status": "Activo"
+          "status": "Habilitado"
         },
         "studies": [
           {
@@ -461,12 +461,12 @@
           "_id": "5da39f17122830a9688ec9a1",
           "name": "Alverso",
           "lastname": "Fernandez",
-          "birthday": "1984-04-26T00:00:00Z",
+          "birthdate": "1984-04-26T00:00:00Z",
           "dni": 10000001,
           "email": "alverso.fernandez@hotmail.com",
           "password": "$2a$08$.Q1.nb9Xo55SR2qOKsw8xuNfa0C.2R2qwc6I/wrPA9dL1.lSe5hiq",
           "role": "Profesional",
-          "status": "Activo"
+          "status": "Habilitado"
         },
         "speciality": "Traumatología"
       },

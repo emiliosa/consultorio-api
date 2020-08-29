@@ -16,21 +16,46 @@ exports.getAppointments = async (filters, page, limit) => {
     let query = {};
     let { patient, professional, date } = filters;
 
-    if (patient && patient.userId) {
-      query = {
-        "patient.user._id": ObjectId(patient.userId)
-      };
+    if (patient) {
+      if (patient.userId) {
+        query = {
+          "patient.user._id": ObjectId(patient.userId)
+        };
+      }
+
+      if (patient.patientId) {
+        query = {
+          "patient._id": ObjectId(patient.patientId)
+        };
+      }
     }
 
-    if (professional && professional.userId) {
-      query = {
-        "professional.user._id": ObjectId(professional.userId)
-      };
+    if (professional) {
+      if (professional.userId) {
+        query = {
+          "professional.user._id": ObjectId(professional.userId)
+        };
+      }
+
+      if (professional.professionalId) {
+        query = {
+          "professional._id": ObjectId(professional.professionalId)
+        };
+      }
     }
 
-    if (date && date === 'today') {
-      const from = moment().startOf('day');
-      const to = moment(from).endOf('day').toDate();
+    if (date) {
+      let from = {};
+      let to = {};
+
+      if (date === 'today') {
+        from = moment().format('YYYY-MM-DD 00:00:00');
+        to = moment().format('YYYY-MM-DD 23:59:59');
+      } else {
+        from = moment(new Date(date)).format('YYYY-MM-DD 00:00:00');
+        to = moment(new Date(date)).format('YYYY-MM-DD 23:59:59');
+      }
+
       query = {
         date: {
           "$gte": from,
@@ -67,21 +92,46 @@ exports.createAppointment = async (attributes, user) => {
   try {
     console.log(attributes, user);
 
-    const { patientId, professionalId, description, date } = attributes;
-
-    // const appointment = await AppointmentModel.find({
-
-    // });
-
+    let errors = [];
+    const { patientId, professionalId, description, date, time } = attributes;
+    const { number, hour } = time || {};
     const patient = await PatientModel.findOne({ _id: patientId });
     const professional = await ProfessionalModel.findOne({ _id: professionalId });
+
+    if (!patient) {
+      errors.push("Patient does not exists");
+    }
+
+    if (!professional) {
+      errors.push("Professional does not exists");
+    }
+
+    if (!description) {
+      errors.push("Description is required");
+    }
+
+    if (!date) {
+      errors.push("Date is required");
+    }
+
+    if (!number) {
+      errors.push("Appointment number is required");
+    }
+
+    if (!hour) {
+      errors.push("Appointment hour is required");
+    }
+
+    if (errors.length > 0) {
+      throw Error(errors.join(', '));
+    }
 
     const newAppointment = await AppointmentModel.create({
       patient: patient,
       professional: professional,
       date: new Date(date),
+      time: { number, hour },
       description: description,
-      // status: 'Pendiente',
       createdByUser: user
     });
 
@@ -91,7 +141,7 @@ exports.createAppointment = async (attributes, user) => {
     const text = NewAppointmentTemplate.getText(
       patient.user.name + " " + patient.user.lastname,
       professional.user.name + " " + professional.user.lastname,
-      moment(newAppointment.date).format("DD/MM/YYYY HH:mm"),
+      moment(newAppointment.date).format("DD/MM/YYYY") + " " + newAppointment.time.hour,
       newAppointment.description
     );
 
@@ -128,7 +178,7 @@ exports.updateAppointment = async (id, attributes) => {
       patientFullname,
       professionalFullname,
       appointment.description,
-      newAttributes.date !== undefined ? moment(newAttributes.date).format("DD/MM/YYYY HH:mm") : undefined,
+      newAttributes.date !== undefined ? moment(newAttributes.date).format("DD/MM/YYYY") + " " + newAppointment.time.hour : undefined,
       newAttributes.status !== undefined ? newAttributes.status : undefined
     );
 
