@@ -1,6 +1,7 @@
 'use strict'
 
 const PatientModel = require('../models/patient');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.getPatients = async (query, page, limit) => {
   try {
@@ -36,7 +37,15 @@ exports.addMedicalHistory = async (id, data) => {
 
     console.log("paciente: ", patient);
 
-    patient.medicalHistory.push({ type, desc, severity, date, treatment, status });
+    patient.medicalHistory.push({
+      _id: new ObjectId(),
+      type,
+      desc,
+      severity,
+      date: new Date(date),
+      treatment,
+      status
+    });
 
     patient.save();
 
@@ -56,7 +65,11 @@ exports.removeMedicalHistory = async (id, medicalHistoryId) => {
       throw Error("Paciente inexistente");
     }
 
-    return await patient.updateOne({ _id: id }, { $pullAll: { medicalHistory: [medicalHistoryId] } });
+    return await PatientModel.findOneAndUpdate(
+      { _id: ObjectId(id) },
+      { $pull: { medicalHistory: { _id: ObjectId(medicalHistoryId) } } },
+      {new: true},
+    );
   } catch (e) {
     throw Error(e);
   }
