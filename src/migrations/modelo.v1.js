@@ -437,8 +437,8 @@ db.appointments.insertMany([
     },
     "date": ISODate("2020-06-01"),
     "time": {
-      "number": 1,
-      "hour": "09:00"
+      "id": 1,
+      "value": "09:00"
     },
     "status": "Presente",
     "createdByUser": {
