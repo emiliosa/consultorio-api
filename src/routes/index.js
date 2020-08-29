@@ -51,9 +51,6 @@ api.put('/appointments/:id', authMiddleware.authCallback, AppointmentController.
 // eliminar turno
 api.delete('/appointments/:id', authMiddleware.authCallback, AppointmentController.deleteAppointment);
 
-// listar news
-api.get('/news/', authMiddleware.authCallback, AppointmentController.getNews);
-
 // listar pacientes
 api.get('/patients/', authMiddleware.authCallback, PatientController.getPatients);
 // ver paciente
