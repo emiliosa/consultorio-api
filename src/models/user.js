@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
   name: { type: String, required: true, validate: [undefinedNotAllowed, 'Undefined value not allowed'] },
   lastname: { type: String, required: true },
   birthdate: { type: Date, required: true },
-  dni: { type: Number, required: true },
+  dni: { type: Number, required: true, unique: true },
   email: { type: String, unique: true, required: true, validate: [validateEmail, 'Syntax is not valid'] },
   password: { type: String, required: true },
   role: { type: JSON, required: true },

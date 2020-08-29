@@ -5,11 +5,11 @@ const mongoosePaginate = require('mongoose-paginate');
 const { ObjectId } = require('mongoose');
 
 const NewsSchema = mongoose.Schema({
-  fromDate: {type: Date, required: true},
-  toDate: {type: Date, required: true},
-  description: {type: String, required: true},
-  url: {type: URL, required: true},
-  createdBy: {type: JSON, required: true},
+  // _id: {type: String, required: true},
+  titulo: {type: String, required: true},
+  header: {type: String, required: true},
+  extracto: {type: String, required: true},
+  url: {type: String, required: true}
 });
 
 NewsSchema.plugin(mongoosePaginate);
