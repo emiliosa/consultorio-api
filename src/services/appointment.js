@@ -49,11 +49,15 @@ exports.getAppointments = async (filters, page, limit) => {
       let to = {};
 
       if (date === 'today') {
-        from = moment().format('YYYY-MM-DD 00:00:00');
-        to = moment().format('YYYY-MM-DD 23:59:59');
+        from = moment.utc().format('YYYY-MM-DD 00:00:00');
+        to = moment.utc().format('YYYY-MM-DD 23:59:59');
       } else {
-        from = moment(new Date(date)).format('YYYY-MM-DD 00:00:00');
-        to = moment(new Date(date)).format('YYYY-MM-DD 23:59:59');
+
+        from = moment.utc(new Date(date)).format('YYYY-MM-DD 00:00:00');
+        to = moment.utc(new Date(date)).format('YYYY-MM-DD 23:59:59');
+
+        console.log("date: ", date, "new date: ", new Date(date), "from: ", from, "tp: ", to);
+
       }
 
       query = {
@@ -90,6 +94,7 @@ exports.getAppointmentById = async (id) => {
 // TODO mejorar templates de envío de mails, usar .pug
 exports.createAppointment = async (attributes, user) => {
   try {
+    console.log(attributes);
     let errors = [];
     const { patientId, professionalId, description, date, time } = attributes;
     const { id, value } = time || {};
@@ -120,10 +125,15 @@ exports.createAppointment = async (attributes, user) => {
       throw Error(errors.join(', '));
     }
 
+    const newDate = new Date(date);
+    newDate.setHours(time.value.split(':')[0]);
+    newDate.setMinutes(time.value.split(':')[1]);
+    newDate.setSeconds(0);
+
     const newAppointment = await AppointmentModel.create({
       patient: patient,
       professional: professional,
-      date: new Date(date),
+      date: newDate,
       time: { id, value },
       description: description,
       createdByUser: user
@@ -135,7 +145,7 @@ exports.createAppointment = async (attributes, user) => {
     const text = NewAppointmentTemplate.getText(
       patient.user.name + " " + patient.user.lastname,
       professional.user.name + " " + professional.user.lastname,
-      moment(newAppointment.date).format("DD/MM/YYYY") + " " + newAppointment.time.value,
+      moment.utc(newAppointment.date).format("DD/MM/YYYY") + " " + newAppointment.time.value,
       newAppointment.description
     );
 
@@ -172,7 +182,7 @@ exports.updateAppointment = async (id, attributes) => {
       patientFullname,
       professionalFullname,
       appointment.description,
-      newAttributes.date !== undefined ? moment(newAttributes.date).format("DD/MM/YYYY") + " " + newAppointment.time.value : undefined,
+      newAttributes.date !== undefined ? moment.utc(newAttributes.date).format("DD/MM/YYYY") + " " + newAppointment.time.value : undefined,
       newAttributes.status !== undefined ? newAttributes.status : undefined
     );
 
