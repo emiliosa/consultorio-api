@@ -64,7 +64,7 @@ api.delete('/patients/:id/medical-history/:medicalHistoryId', authMiddleware.aut
 api.get('/professionals/', authMiddleware.authCallback, ProfessionalController.getProfessionals);
 
 // listar novedades
-api.get('/news', authMiddleware.authCallback, NewsController.getNews);
+api.get('/news', /*authMiddleware.authCallback,*/ NewsController.getNews);
 // ver novedad
 api.get('/news/:id', authMiddleware.authCallback, NewsController.getNewById);
 // actualizar novedad

@@ -90,11 +90,9 @@ exports.getAppointmentById = async (id) => {
 // TODO mejorar templates de envío de mails, usar .pug
 exports.createAppointment = async (attributes, user) => {
   try {
-    console.log(attributes, user);
-
     let errors = [];
     const { patientId, professionalId, description, date, time } = attributes;
-    const { number, hour } = time || {};
+    const { id, value } = time || {};
     const patient = await PatientModel.findOne({ _id: patientId });
     const professional = await ProfessionalModel.findOne({ _id: professionalId });
 
@@ -114,12 +112,8 @@ exports.createAppointment = async (attributes, user) => {
       errors.push("Date is required");
     }
 
-    if (!number) {
-      errors.push("Appointment number is required");
-    }
-
-    if (!hour) {
-      errors.push("Appointment hour is required");
+    if (!id || !value) {
+      errors.push("Appointment time {id, value} is required");
     }
 
     if (errors.length > 0) {
@@ -130,7 +124,7 @@ exports.createAppointment = async (attributes, user) => {
       patient: patient,
       professional: professional,
       date: new Date(date),
-      time: { number, hour },
+      time: { id, value },
       description: description,
       createdByUser: user
     });
@@ -141,7 +135,7 @@ exports.createAppointment = async (attributes, user) => {
     const text = NewAppointmentTemplate.getText(
       patient.user.name + " " + patient.user.lastname,
       professional.user.name + " " + professional.user.lastname,
-      moment(newAppointment.date).format("DD/MM/YYYY") + " " + newAppointment.time.hour,
+      moment(newAppointment.date).format("DD/MM/YYYY") + " " + newAppointment.time.value,
       newAppointment.description
     );
 
@@ -178,7 +172,7 @@ exports.updateAppointment = async (id, attributes) => {
       patientFullname,
       professionalFullname,
       appointment.description,
-      newAttributes.date !== undefined ? moment(newAttributes.date).format("DD/MM/YYYY") + " " + newAppointment.time.hour : undefined,
+      newAttributes.date !== undefined ? moment(newAttributes.date).format("DD/MM/YYYY") + " " + newAppointment.time.value : undefined,
       newAttributes.status !== undefined ? newAttributes.status : undefined
     );
 
